@@ -3,10 +3,70 @@
  */
 package com.ticketbooking;
 
+import com.ticketbooking.entities.User;
+import com.ticketbooking.services.UserBookingService;
+import com.ticketbooking.utils.UserServiceUtil;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
+
 public class App {
 
     public static void main(String[] args) {
 
+        System.out.println(" Running train booking system");
+        Scanner sc = new Scanner(System.in);
+        int option = 0;
+        UserBookingService userBookingService;
+        try{
+            userBookingService = new UserBookingService();
+        } catch (IOException ex) {
+            System.out.println("there is something wrong");
+            return;
+        }
+        while(option!=7){
+            System.out.println("choose option");
+            System.out.println("1: sign up");
+            System.out.println("2: login");
+            System.out.println("3: Fetch Booking");
+            System.out.println("4: Search Trains");
+            System.out.println("5: Book a seat");
+            System.out.println("6: Cancel Booking");
+            System.out.println("7: Exit");
+            option = sc.nextInt();
+            switch(option){
+                case 1:
+                    System.out.println("Enter user name to sign up");
+                    String nameToSignUp = sc.next();
+                    System.out.println("Enter user password to sign up");
+                    String passwordToSignUp = sc.next();
+                    User userToSignUp = new User(nameToSignUp,passwordToSignUp, UserServiceUtil.hashPassword(passwordToSignUp),
+                            new ArrayList<>(), UUID.randomUUID().toString());
+                    userBookingService.signUp(userToSignUp);
+                    break;
+
+                case 2:
+                    System.out.println("Enter user name to login");
+                    String nameToLogin = sc.next();
+                    System.out.println("Enter user password to login");
+                    String passwordToLogin = sc.next();
+                    User userToLogin = new User(nameToLogin, passwordToLogin, UserServiceUtil.hashPassword(passwordToLogin),
+                            new ArrayList<>(), UUID.randomUUID().toString());
+                    try{
+                        userBookingService = new UserBookingService(userToLogin);
+                    }catch (IOException ex){
+                        return;
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("Fetching your booking");
+                    UserBookingService.fetchBookings();
+                    break;
+            }
+        }
 
     }
 }
