@@ -4,7 +4,14 @@
 [versions]
 guava = "33.4.5-jre"
 junit = "4.13.2"
+# New dependencies added for JSON processing and password hashing
+jackson = "2.19.2"
+jbcrypt = "0.4"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { module = "junit:junit", version.ref = "junit" }
+# Jackson for JSON serialization/deserialization
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
+# jBCrypt for secure password hashing
+jbcrypt = { module = "org.mindrot:jbcrypt", version.ref = "jbcrypt" }

@@ -1,11 +1,14 @@
 package com.ticketbooking.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class User {
      private String name;
      private String password;
-     private String hashPassword;
+    @JsonProperty("hashed_password")
+    private String hashPassword;
      private List<Ticket> ticketsBooked;
      private String userId;
 
@@ -27,7 +30,7 @@ public class User {
          return password;
     }
 
-    public String getHashPassword() {
+    public String getHashedPassword() {
          return hashPassword;
     }
 
@@ -36,9 +39,15 @@ public class User {
     }
 
     public void printTickets() {
-         for (int i = 0; i < ticketsBooked.size(); i++) {
-             System.out.println(ticketsBooked.get(i).getTrainInfo());
+         if(ticketsBooked == null  || !ticketsBooked.isEmpty()){
+             for (int i = 0; i < ticketsBooked.size(); i++) {
+                 System.out.println((i + 1) + ". " + ticketsBooked.get(i).getTrainInfo());
+             }
+             System.out.println("---------------------------");
+        }else{
+             System.out.println("No tickets is booked for the user");
          }
+
     }
 
     public String getUserId() {
@@ -49,14 +58,30 @@ public class User {
          this.name = name;
     }
 
-     public void setHashPassword(String hashPassword) {
-         this.hashPassword = hashPassword;
-     }
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
+    }
 
-     public void getHashPassword(List<Ticket> ticketsBooked) {
 
+//     public void getHashPassword(List<Ticket> ticketsBooked) {
+//         this.ticketsBooked = ticketsBooked;
+//     }
+
+    public void getTicketsBooked(List<Ticket> ticketsBooked) {
          this.ticketsBooked = ticketsBooked;
-     }
+    }
+
+    public String getHashPassword() {
+        return hashPassword;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+//    public void setTicketsBooked(List<Ticket> ticketsBooked) {
+//        this.ticketsBooked = ticketsBooked;
+//    }
 
      public void setUserId(String userId) {
          this.userId = userId;
