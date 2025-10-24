@@ -1,14 +1,29 @@
 package com.ticketbooking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ticket {
+    @JsonProperty("ticket_id")
     private String ticketId;
+
+    @JsonProperty("user_id")
     private String userId;
+
     private String source;
     private String destination;
+
+    @JsonProperty("date_of_travel")
     private Date dateOfTravel;
+
     private Train train;
+
+    public Ticket() {
+        // Required for Jackson deserialization
+    }
 
     public Ticket(String ticketId, String userId, String source, String destination, Date dateOfTravel, Train train) {
         this.ticketId = ticketId;

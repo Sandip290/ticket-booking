@@ -17,8 +17,15 @@ public class TrainService {
 
     private Train train;
     private List<Train> trainList;
+//    private ObjectMapper objectMapper = new ObjectMapper();
     private ObjectMapper objectMapper = new ObjectMapper();
-    private static final String TRAINS_PATH = "trains.json";
+
+    {
+        objectMapper.findAndRegisterModules();
+        objectMapper.configure(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
+
+    private static final String TRAINS_PATH = "app/src/main/java/com/ticketbooking/localdb/trains.json";
 
 //    public TrainService(Train train1) throws IOException{
 //        this.train = train1;
