@@ -21,4 +21,5 @@ Ticket Booking System is a full-stack application built to simulate a real-world
 - Integrated MySQL for persistent data storage
 - Focused on clean service-layer design and validation
 
-
+## Why This Project Matters
+This project helped me understand backend application structure, database interaction, and real-world workflow handling using Java and Spring Boot.
